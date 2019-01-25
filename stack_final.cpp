@@ -1,6 +1,12 @@
 #include<iostream>
+#include<clocale>
 #include<cstdlib>
 #define MAX 5
+#define RED "\033[31m"
+#define RST "\033[0m"
+#define GRE "\033[32m"
+#define BLU "\033[34m"
+#define BLA "\033[30m"
 using namespace std;
 void neat()
 {
@@ -35,21 +41,29 @@ void Stack<type>::ICFD(int &i)
 take:
 		neat();  cin >> rep;
 		if(rep == 'N' || rep == 'n')
+		{	i=0;
+			for(i=0;i<MAX;i++)
+				s[i] = 0;
 			i=0;
+		}
 		else if(rep == 'y' || rep == 'Y')
 			i = i;
 		else
 		{
+			cout << RED;
 			neat(); cout << "Please enter correct option .... ";
+			cout << RST;
 			if(z < 2)
 				goto take;
 			else
+			{	cout << RED;
 				neat(); cout << "SORRY YOU CROSSED MAXIMUM LIMITS ";
-			return;
+				cout << RST;
+				return;
+			}
 		}
 	}
 above :
-	//neat();	cout << "------------------------------------------------------------------------";	
 	neat();	cout << "------------------------------ Process Menu ----------------------------";	
 	neat();	cout << "------------------------------------------------------------------------";	
 	neat();	cout << " 1.Push";	
@@ -65,10 +79,11 @@ above :
 		if(i== MAX)
 		{
 			system("clear");
+			cout << RED;
 			neat();	cout << "************************************************************************";
 			neat();	cout << "*************************** STACK OVERFLOW *****************************";
 			neat();	cout << "************************************************************************";
-			neat(); 
+			neat(); cout << RST;
 			neat(); cout << "Do you want continue ..... : Y/N ";
 			neat();  cin >> rep;
 			if(rep == 'y' || rep == 'Y')
@@ -87,17 +102,17 @@ above :
 		if(i == 0)
 		{
 			system("clear");
+			cout << RED;
 			neat();	cout << "************************************************************************";
 			neat();	cout << "************************** STACK UNDERFLOW *****************************";
 			neat();	cout << "************************************************************************";
-			neat(); 
+			neat(); cout << RST;  
 			neat(); cout << "Do you want continue ..... : Y/N ";
 			neat();  cin >> rep;
 			if(rep == 'y' || rep == 'Y')
 				goto above;
 			else
 				return;
-			//-------------------------------------------------------------------
 		}
 		--i;
 		neat(); cout << s[i] <<" - is Deleted " ;
@@ -107,6 +122,7 @@ above :
 	else if(op == 3)
 	{
 		chance = 0;
+		system("clear");
 		neat(); cout << "Elements of Stack : ";
 		neat();
 		for(int k=0;k<MAX;k++)
@@ -123,13 +139,17 @@ above :
 		if(chance < 2)
 		{
 			system("clear");//neat();
+			cout << RED;
 			neat(); cout << "WRONG OPTION : " << 2-chance << " chances remaining." << endl;
 			chance +=1;
+			cout << RST;
 			goto above;
 		}
 		else 
 		{
+			cout << RED;
 			neat(); cout << "SORRY YOU HAVE MADE MAXIMUM ATTEMPTS " << endl;
+			cout << RST;
 			goto terminate;
 		}
 	}	
@@ -197,14 +217,22 @@ terminate:
 	}
 	else
 	{
-		if(chance < 2){
+		cout << RED;
+		if(chance < 2)
+		{
+			system("clear");
 			neat(); cout << "YOU ENTERED WRONG KEY : " << 2-chance << " chances remaining." << endl;
+			cout << RST;
 			chance +=1;
-			goto repeat;}
-		else {
+			goto repeat;
+		}
+		else 
+		{
+			system("clear");
 			neat(); cout << "SORRY YOU HAVE MADE MAXIMUM ATTEMPTS " << endl;
-			goto terminate;}
+			cout << RST;
+			goto terminate;
+		}
+		cout << RST;
 	}
-
-	neat();cout << "************************************************************************" << endl;	
 }
